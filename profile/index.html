@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>ProfileClip QR Viewer</title>
+    <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+<main class="page">
+    <header class="hero">
+        <div>
+            <h1>ProfileClip QR Viewer</h1>
+            <p>貼上 QR 連結或直接帶入 <code>?d=</code> 參數即可解碼。</p>
+        </div>
+        <button id="copy-json" class="ghost">Copy JSON</button>
+    </header>
+
+    <section class="decoder">
+        <input id="input" type="text" placeholder="貼上完整連結或 d 參數" />
+        <button id="decode" class="primary">Decode</button>
+        <div id="status" class="status"></div>
+    </section>
+
+    <section id="profile" class="profile"></section>
+</main>
+
+<!-- pako for zlib inflate -->
+<script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

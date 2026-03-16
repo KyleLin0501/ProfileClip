@@ -1,0 +1,145 @@
+:root {
+    --bg: #fff3e6;
+    --card: #ffffff;
+    --ink: #1f1f1f;
+    --muted: #6b6b6b;
+    --shadow: 0 16px 40px rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+}
+
+.page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 28px 20px 60px;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.hero h1 {
+    font-size: 28px;
+    margin: 0 0 6px;
+}
+
+.hero p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.decoder {
+    margin-top: 22px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.decoder input {
+    flex: 1;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #f1c9a8;
+    background: rgba(255,255,255,0.8);
+    font-size: 14px;
+}
+
+.primary, .ghost {
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.primary {
+    background: #ffb36b;
+    color: #2b1500;
+}
+
+.ghost {
+    background: rgba(255,255,255,0.7);
+    color: #2b1500;
+}
+
+.status {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.profile {
+    margin-top: 28px;
+    display: grid;
+    gap: 16px;
+}
+
+.section {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.section h2 {
+    margin: 0 0 12px;
+    font-size: 16px;
+}
+
+.cards {
+    display: grid;
+    gap: 12px;
+}
+
+.card {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 14px;
+    padding: 14px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    background: rgba(0,0,0,0.05);
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.thumb img {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.meta {
+    display: grid;
+    gap: 6px;
+}
+
+.meta .title {
+    font-weight: 700;
+}
+
+.meta .subtitle, .meta .detail {
+    color: var(--muted);
+    font-size: 14px;
+}

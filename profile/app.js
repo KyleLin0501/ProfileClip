@@ -5,9 +5,10 @@ const profileEl = document.getElementById("profile");
 const copyBtn = document.getElementById("copy-json");
 
 let lastJSON = null;
+let debounceTimer = null;
 
 const TYPE_META = {
-    header: { label: "Header", color: "#4C8BF5", icon: "👤" },
+    header: { label: "簡介", color: "#4C8BF5", icon: "👤" },
     education: { label: "Education", color: "#5B73FF", icon: "🎓" },
     experience: { label: "Experience", color: "#38B26C", icon: "💼" },
     achievement: { label: "Achievement", color: "#FF9E57", icon: "✨" },
@@ -71,9 +72,6 @@ function renderBlock(block) {
     const subtitle = document.createElement("div");
     subtitle.className = "subtitle";
 
-    const detail = document.createElement("div");
-    detail.className = "detail";
-
     if (block.type === "header") {
         title.textContent = block.title || "";
         subtitle.textContent = block.subtitle || "";
@@ -89,13 +87,10 @@ function renderBlock(block) {
     } else if (block.type === "socialLink") {
         title.textContent = block.platform || "";
         subtitle.textContent = block.url || "";
-    } else {
-        title.textContent = block.title || block.role || block.school || "";
     }
 
     metaBox.appendChild(title);
     if (subtitle.textContent) metaBox.appendChild(subtitle);
-    if (detail.textContent) metaBox.appendChild(detail);
 
     card.appendChild(metaBox);
     return card;
@@ -147,6 +142,14 @@ function tryDecode(payload) {
     }
 }
 
+function scheduleDecode(value) {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+        const payload = getPayloadFromInput(value.trim());
+        if (payload) tryDecode(payload);
+    }, 200);
+}
+
 decodeBtn.addEventListener("click", () => {
     const payload = getPayloadFromInput(input.value.trim());
     if (!payload) {
@@ -154,6 +157,14 @@ decodeBtn.addEventListener("click", () => {
         return;
     }
     tryDecode(payload);
+});
+
+input.addEventListener("input", () => {
+    scheduleDecode(input.value);
+});
+
+input.addEventListener("paste", () => {
+    setTimeout(() => scheduleDecode(input.value), 50);
 });
 
 copyBtn.addEventListener("click", async () => {

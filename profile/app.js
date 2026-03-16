@@ -30,10 +30,16 @@ function base64UrlToBytes(str) {
 
 function decodePayload(payload) {
     const compressed = base64UrlToBytes(payload);
-    const inflated = window.pako.inflate(compressed);
+    let inflated;
+    try {
+        inflated = window.pako.inflate(compressed); // zlib header
+    } catch {
+        inflated = window.pako.inflateRaw(compressed); // raw deflate
+    }
     const jsonText = new TextDecoder().decode(inflated);
     return JSON.parse(jsonText);
 }
+
 
 function getPayloadFromInput(value) {
     if (!value) return null;
